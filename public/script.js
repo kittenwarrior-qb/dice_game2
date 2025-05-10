@@ -44,9 +44,18 @@ start_button.addEventListener("click", function () {
 });
 
 reset_game_button.addEventListener("click", function () {
+  socket.emit("resetGame");
+});
+
+socket.on("resetGame", () => {
   player_list = [];
   result_list = [];
   player_points = {};
+  currentPlayerIndex = 0;
+  rounds = 1;
+  usedDiceFaces = [];
+  previousScores = [];
+
   add_player_input.value = "";
   roll_dice_button.disabled = true;
   start_button.disabled = false;
@@ -54,7 +63,6 @@ reset_game_button.addEventListener("click", function () {
   dice_result.innerHTML = "";
   scoreboard.innerHTML = "";
   playerList.innerHTML = "";
-  previousScores = [];
 });
 
 roll_dice_button.addEventListener("click", function () {

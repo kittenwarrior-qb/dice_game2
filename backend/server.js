@@ -31,12 +31,17 @@ io.on("connection", (socket) => {
     io.emit("diceRolled", { player: playerName, roll });
   });
 
+  socket.on("resetGame", () => {
+    players = [];
+    io.emit("resetGame");
+  });
+
   socket.on("disconnect", () => {
-    console.log("❌ Client disconnected");
+    console.log("Client disconnected");
   });
 });
 
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
-  console.log(`✅ Server is running at http://localhost:${PORT}`);
+  console.log(`Server is running at http://localhost:${PORT}`);
 });
